@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Jacobs Trivia</title>
+    <!-- Reset CSS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
+    <!-- Link to Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <!-- Link to CSS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Jacob's Trivia Game</h1>
+        </div>
+        <row>
+            <div class="col-md-12">
+                <button type="button" class="btn start">Start</button>
+            </div>
+        </row>
+        <row>
+            <div class="col-md-12">
+                <h2>
+                    <div id="timePlace"></div>
+                </h2>
+            </div>
+        </row>
+        <row class="informationQuestion">
+            <row>
+                <div class="col-md-12">
+                    <h2>
+                        <div id="artistSongDiv"></div>
+                    </h2>
+                </div>
+            </row>
+            <div class="col-md-12">
+                <h2>
+                    <div id="questionDiv" class="question"></div>
+                </h2>
+                <h2>
+                    <div id="answerDiv"></div>
+                </h2>
+            </div>
+        </row>
+        <row>
+            <div class="col-md-4">
+                <h2>
+                    <div id="imageDiv"></div>
+                </h2>
+            </div>
+        </row>
+        <row class="questionBlock">
+            <row>
+                <div class="col-md-12">
+                    <h2>
+                        <div id="choice1Div" class="choice"></div>
+                    </h2>
+                </div>
+                <div class="col-md-4">
+                    <h2>
+                        <div id="correctDiv"></div>
+                    </h2>
+                </div>
+            </row>
+            <row>
+                <div class="col-md-12">
+                    <h2>
+                        <div id="choice2Div" class="choice"></div>
+                    </h2>
+                </div>
+                <div class="col-md-4">
+                    <h2>
+                        <div id="incorrectDiv"></div>
+                    </h2>
+                </div>
+            </row>
+            <row>
+                <div class="col-md-12">
+                    <h2>
+                        <div id="choice3Div" class="choice"></div>
+                    </h2>
+                </div>
+                <div class="col-md-4">
+                    <h2>
+                        <div id="unansweredDiv"></div>
+                    </h2>
+                </div>
+            </row>
+            <row>
+                <div class="col-md-12">
+                    <h2>
+                        <div id="choice4Div" class="choice"></div>
+                    </h2>
+                </div>
+                <div class="col-md-8">
+                    <h2>
+                        <div id="restartDiv"></div>
+                    </h2>
+                </div>
+            </row>
+        </row>
+    </div>
+    <!-- Link to jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Link to JS -->
+    <script src="./assets/javascript/app.js"></script>
+</body>
+
+</html>
