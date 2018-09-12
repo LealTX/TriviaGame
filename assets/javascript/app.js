@@ -15,9 +15,16 @@ $(document).ready(function () {
     var choiceThree = ["Crack", "Cash", "Slip", "Do Less", "Chocolates", "Boy", "Broke Man", "Face"];
     var choiceFour = ["Mind", "Bros", "Fall Through", "Caress", "Roses", "Scrub", "Faker", "Vans"];
 
+    $(".choice").hide();
+
+    $("#choice1Div").on("click", checkAnswer)
+    $("#choice2Div").on("click", checkAnswer)
+    $("#choice3Div").on("click", checkAnswer)
+    $("#choice4Div").on("click", checkAnswer)
+
     $(".start").on("click", function () {
         startGame();
-    });
+    })
 
     function startGame() {
         $(".start").hide();
@@ -25,33 +32,68 @@ $(document).ready(function () {
     }
 
     function countdown() {
-            if (time == 0) {
-                clearTimeout(timer);
-                $("#timePlace").html("You're Outta Time!!");
-                // doSomething();
-            } else {
-                $("#timePlace").html(time + " secs remaining");
-                time--;
-            }
+        if (time == 0) {
+            clearTimeout(timer);
+            $("#timePlace").html("You're Outta Time!!");
+            // doSomething();
+        } else {
+            $("#timePlace").html(time + " secs remaining");
+            time--;
         }
+    }
 
-        function displayQuestion() {
-            $("#answerDiv").hide();
-            $("#imageDiv").hide();
+    function checkAnswer() {
+        console.log($(this).text());
 
-            $("#timePlace").show();
-            $("#artistSongDiv").show();
-            $("#questionDiv").show();
-            $(".choice").show();
-
-            timer = setInterval(countdown, 1000);
-            var questionNumber = count + 1;
-            $("#artistSongDiv").html(questionNumber + ". " + artistSong[count]);
-            $("#questionDiv").html('"' + question[count] + '"');
-            $("#choice1Div").html(choiceOne[count]);
-            $("#choice2Div").html(choiceTwo[count]);
-            $("#choice3Div").html(choiceThree[count]);
-            $("#choice4Div").html(choiceFour[count]);
+        if ($(this).text() === answer[count]) {
+            console.log("Correct!")
+            correct++;
+            showCorrectPage();
+        } else {
+            console.log("Incorrect!")
+            incorrect++;
+            showIncorrectPage();
         }
+    }
 
-    });
+    function displayQuestion() {
+        timer = setInterval(countdown, 1000);
+        $("#answerDiv").hide();
+        $("#imageDiv").hide();
+        $("#correctDiv").hide();
+        $("#incorrectDiv").hide();
+
+        $("#timePlace").show();
+        $("#artistSongDiv").show();
+        $("#questionDiv").show();
+        $(".choice").show();
+
+        var questionNumber = count + 1;
+        $("#artistSongDiv").html(questionNumber + ". " + artistSong[count]);
+        $("#questionDiv").html('"' + question[count] + '"');
+
+        $("#choice1Div").html(choiceOne[count]);
+        $("#choice2Div").html(choiceTwo[count]);
+        $("#choice3Div").html(choiceThree[count]);
+        $("#choice4Div").html(choiceFour[count]);
+
+    }
+
+    function showCorrectPage() {
+        $("#answerDiv").show();
+        $("#imageDiv").show();
+        $("#correctDiv").show();
+
+        $(".choice").hide();
+        $("#timePlace").hide();
+
+        $("#correctDiv").html("You Guessed Correct!!");
+        $("#answerDiv").html("Corrected Lyric: "+answer[count]);
+
+        count++;
+        clearTimeout(timer);
+        time = 30;
+        setInterval(displayQuestion, 3000);
+    }
+
+});
