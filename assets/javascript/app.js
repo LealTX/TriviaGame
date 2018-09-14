@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var count = 0;
-    var time = 30;
+    var time = 10;
     var isSelected = false;
     var timer;
     var correct = 0;
@@ -26,6 +26,10 @@ $(document).ready(function () {
         startGame();
     })
 
+    $(".retry").on("click", function(){
+        location.reload();
+    })
+
     function startGame() {
         $(".start").hide();
         displayQuestion();
@@ -35,7 +39,7 @@ $(document).ready(function () {
         if (time == 0) {
             clearTimeout(timer);
             $("#timePlace").html("You're Outta Time!!");
-            // doSomething();
+            outOfTime();
         } else {
             $("#timePlace").html(time + " secs remaining");
             time--;
@@ -46,24 +50,26 @@ $(document).ready(function () {
         console.log($(this).text());
 
         if ($(this).text() === answer[count]) {
-            console.log("Correct!")
-            correct++;
             showCorrectPage();
         } else {
             console.log("Incorrect!")
-            incorrect++;
             showIncorrectPage();
         }
     }
 
     function displayQuestion() {
+        time = 10;
+        clearInterval(timer);
         timer = setInterval(countdown, 1000);
+        $("#timePlace").show();
+        $("#timePlace").html(time + " secs remaining");
+
         $("#answerDiv").hide();
         $("#imageDiv").hide();
         $("#correctDiv").hide();
         $("#incorrectDiv").hide();
+        $("#unansweredDiv").hide();
 
-        $("#timePlace").show();
         $("#artistSongDiv").show();
         $("#questionDiv").show();
         $(".choice").show();
@@ -88,12 +94,77 @@ $(document).ready(function () {
         $("#timePlace").hide();
 
         $("#correctDiv").html("You Guessed Correct!!");
-        $("#answerDiv").html("Corrected Lyric: "+answer[count]);
 
+        correct++;
         count++;
-        clearTimeout(timer);
-        time = 30;
-        setInterval(displayQuestion, 3000);
+
+        if (count <= answer.length - 1) {
+            setTimeout(displayQuestion, 3000);
+        }
+        else {
+            gameOver();
+        }
+    }
+
+    function outOfTime() {
+        $("#answerDiv").show();
+        $("#imageDiv").show();
+        $("#unansweredDiv").show();
+
+        $(".choice").hide();
+
+        $("#unansweredDiv").html("You answered nothing, you loser!");
+        $("#answerDiv").html("Correct was Lyric: " + answer[count]);
+
+        unanswered++;
+        count++;
+
+        if (count <= answer.length - 1) {
+            setTimeout(displayQuestion, 3000);
+        }
+        else {
+            gameOver();
+        }
+    }
+
+    function showIncorrectPage() {
+        $("#answerDiv").show();
+        $("#imageDiv").show();
+        $("#incorrectDiv").show();
+
+        $(".choice").hide();
+        $("#timePlace").hide();
+
+        $("#incorrectDiv").html("Incorrect Guess!!");
+        $("#answerDiv").html("Correct was Lyric: " + answer[count]);
+
+        incorrect++;
+        count++;
+
+        if (count <= answer.length - 1) {
+            setTimeout(displayQuestion, 3000);
+        }
+        else {
+            gameOver();
+        }
+    }
+
+    function gameOver() {
+        $("#artistSongDiv").hide();
+        $(".choice").hide();
+        $("#timePlace").hide();
+        $("#answerDiv").hide();
+
+        $("#incorrectDiv").show();
+        $("#correctDiv").show();
+        $("#unansweredDiv").show();
+        $(".retry").show();
+
+        var results = (correct / answer.length)*100;
+        $("#questionDiv").html("Your score: "+results+"%");
+        $("#correctDiv").html("Correct: "+correct);
+        $("#incorrectDiv").html("Incorrect: "+incorrect);
+        $("#unansweredDiv").html("Unanswered: "+unanswered);
     }
 
 });
