@@ -1,7 +1,8 @@
 $(document).ready(function () {
+
+    // Define all varibles and arrays
     var count = 0;
     var time = 10;
-    var isSelected = false;
     var timer;
     var correct = 0;
     var incorrect = 0;
@@ -14,41 +15,55 @@ $(document).ready(function () {
     var choiceTwo = ["Spine", "Dog", "Dip", "Undress", "Kisses", "Girl", "Pranksta", "Butt"];
     var choiceThree = ["Crack", "Cash", "Slip", "Do Less", "Chocolates", "Boy", "Broke Man", "Face"];
     var choiceFour = ["Mind", "Bros", "Fall Through", "Caress", "Roses", "Scrub", "Faker", "Vans"];
+    var gifs = ["https://media.giphy.com/media/1WDyG7bCEKgOk/giphy.gif", "https://media.giphy.com/media/jwR4iEmJ0fcmk/giphy.gif","https://media.giphy.com/media/7jeMXMtG66HcY/giphy.gif","https://media.giphy.com/media/l0Iy43PHc1KIdZa1O/source.gif","https://media.giphy.com/media/DBqzFVf7iyUMg/giphy.gif","https://media.giphy.com/media/3o6fJ4ipTvOT9wSI1y/source.gif","https://media.giphy.com/media/fmeTX8AURI4co/giphy.gif","https://media.giphy.com/media/gsnKLKhs41KSY/giphy.gif"]
 
+    // hide divs on load
     $(".choice").hide();
+    $(".retry").hide();
+    $("section").hide();
 
+    // make my choice divs clickable and run function on click
     $("#choice1Div").on("click", checkAnswer)
     $("#choice2Div").on("click", checkAnswer)
     $("#choice3Div").on("click", checkAnswer)
     $("#choice4Div").on("click", checkAnswer)
 
+    // start game button
     $(".start").on("click", function () {
-        startGame();
-    })
-
-    $(".retry").on("click", function(){
-        location.reload();
-    })
-
-    function startGame() {
+        $("section").show();
         $(".start").hide();
         displayQuestion();
-    }
+    })
 
+    //restart button
+    $(".retry").on("click", function () {
+        correct = 0;
+        incorrect = 0;
+        unanswered = 0;
+        count = 0;
+        $(".retry").hide();
+        displayQuestion();
+    })
+
+    // function for timer countdown
     function countdown() {
-        if (time == 0) {
+        if (time == 0 && count <= answer.length-1 ) {
             clearTimeout(timer);
             $("#timePlace").html("You're Outta Time!!");
             outOfTime();
+        } else if (time <= 5) {
+            $("#timePlace").css("color", "red");
+            $("#timePlace").html(time + " secs remaining");
+            time--;
         } else {
             $("#timePlace").html(time + " secs remaining");
             time--;
         }
     }
 
+    // checks to see if choice selected is right
     function checkAnswer() {
         console.log($(this).text());
-
         if ($(this).text() === answer[count]) {
             showCorrectPage();
         } else {
@@ -57,9 +72,13 @@ $(document).ready(function () {
         }
     }
 
+    // next 5 functions switch views
+    // displays the next question
     function displayQuestion() {
+        $("#timePlace").css("color", "white");
         time = 10;
         clearInterval(timer);
+        clearTimeout();
         timer = setInterval(countdown, 1000);
         $("#timePlace").show();
         $("#timePlace").html(time + " secs remaining");
@@ -85,6 +104,7 @@ $(document).ready(function () {
 
     }
 
+    // shows correct answer view
     function showCorrectPage() {
         $("#answerDiv").show();
         $("#imageDiv").show();
@@ -93,19 +113,26 @@ $(document).ready(function () {
         $(".choice").hide();
         $("#timePlace").hide();
 
+        $("#imageDiv").html(`<img src="${gifs[count]}" alt=/>`)
+        $("#correctDiv").css("color", "green");
         $("#correctDiv").html("You Guessed Correct!!");
 
         correct++;
         count++;
 
+        console.log("count: "+ count);
+        console.log("answer: "+ answer.length);
+        console.log(count <= answer.length - 1);
+
         if (count <= answer.length - 1) {
             setTimeout(displayQuestion, 3000);
         }
         else {
-            gameOver();
+            setTimeout(gameOver, 3000);
         }
     }
 
+    // shows out of time view
     function outOfTime() {
         $("#answerDiv").show();
         $("#imageDiv").show();
@@ -113,20 +140,27 @@ $(document).ready(function () {
 
         $(".choice").hide();
 
+        $("#imageDiv").html(`<img src="${gifs[count]}" alt=/>`)
+        $("#unansweredDiv").css("color", "yellow");
         $("#unansweredDiv").html("You answered nothing, you loser!");
-        $("#answerDiv").html("Correct was Lyric: " + answer[count]);
+        $("#answerDiv").html("<u>Correct was Lyric: " + answer[count]+"</u>");
 
         unanswered++;
         count++;
+
+        console.log("count: "+ count);
+        console.log("answer: "+ answer.length);
+        console.log(count <= answer.length - 1);
 
         if (count <= answer.length - 1) {
             setTimeout(displayQuestion, 3000);
         }
         else {
-            gameOver();
+            setTimeout(gameOver, 3000);
         }
     }
 
+    // shows incorrect view
     function showIncorrectPage() {
         $("#answerDiv").show();
         $("#imageDiv").show();
@@ -135,36 +169,44 @@ $(document).ready(function () {
         $(".choice").hide();
         $("#timePlace").hide();
 
+        $("#imageDiv").html(`<img src="${gifs[count]}" alt=/>`)
+        $("#incorrectDiv").css("color", "red");
         $("#incorrectDiv").html("Incorrect Guess!!");
-        $("#answerDiv").html("Correct was Lyric: " + answer[count]);
+        $("#answerDiv").html("<u>Correct was Lyric: " + answer[count]+"</u>");
 
         incorrect++;
         count++;
+
+        console.log("count: "+ count);
+        console.log("answer: "+ answer.length);
+        console.log(count <= answer.length - 1);
 
         if (count <= answer.length - 1) {
             setTimeout(displayQuestion, 3000);
         }
         else {
-            gameOver();
+            setTimeout(gameOver, 3000);
         }
     }
 
+    // show game over view
     function gameOver() {
         $("#artistSongDiv").hide();
         $(".choice").hide();
         $("#timePlace").hide();
         $("#answerDiv").hide();
+        $("#imageDiv").hide();
 
         $("#incorrectDiv").show();
         $("#correctDiv").show();
         $("#unansweredDiv").show();
         $(".retry").show();
 
-        var results = (correct / answer.length)*100;
-        $("#questionDiv").html("Your score: "+results+"%");
-        $("#correctDiv").html("Correct: "+correct);
-        $("#incorrectDiv").html("Incorrect: "+incorrect);
-        $("#unansweredDiv").html("Unanswered: "+unanswered);
+        var results = (correct / answer.length) * 100;
+        $("#questionDiv").html("Your score: " + results + "%");
+        $("#correctDiv").html("Correct: " + correct);
+        $("#incorrectDiv").html("Incorrect: " + incorrect);
+        $("#unansweredDiv").html("Unanswered: " + unanswered);
     }
 
 });

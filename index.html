@@ -10,27 +10,34 @@
         crossorigin="anonymous">
     <!-- Link to CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Bowlby+One" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg">
 
     <div class="container">
+        <!-- Header -->
         <div class="jumbotron">
-            <h1>Jacob's Trivia Game</h1>
+            <h1>Guess The Lyrics</h1>
         </div>
+        <!-- Start Button -->
         <row>
             <div class="col-md-12">
-                <button type="button" class="btn start">Start</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block start">Start</button>
             </div>
         </row>
-        <row>
-            <div class="col-md-12">
-                <h2>
-                    <div id="timePlace"></div>
-                </h2>
-            </div>
-        </row>
-        <row class="informationQuestion">
+        <!-- section with all data -->
+        <section class "informationQuestion">
+            <!-- timer -->
+            <row>
+                <div class="col-md-12">
+                    <h2>
+                        <div id="timePlace"></div>
+                    </h2>
+                </div>
+            </row>
+            <!-- artist and song header -->
             <row>
                 <div class="col-md-12">
                     <h2>
@@ -38,71 +45,84 @@
                     </h2>
                 </div>
             </row>
-            <div class="col-md-12">
-                <h2>
-                    <div id="questionDiv" class="question"></div>
-                </h2>
-                <h2>
-                    <div id="answerDiv"></div>
-                </h2>
-            </div>
-        </row>
-        <row>
-            <div class="col-md-4">
-                <h2>
-                    <div id="imageDiv"></div>
-                </h2>
-            </div>
-        </row>
-        <row class="questionBlock">
+            <!-- lyric section -->
             <row>
                 <div class="col-md-12">
                     <h2>
-                        <div id="choice1Div" class="choice"></div>
+                        <div id="questionDiv" class="question"></div>
                     </h2>
                 </div>
-                <div class="col-md-4">
+            </row>
+            <!-- these will show after user guesses -->
+            <row>
+                <div class="col-md-12">
                     <h2>
                         <div id="correctDiv"></div>
                     </h2>
                 </div>
-            </row>
-            <row>
                 <div class="col-md-12">
-                    <h2>
-                        <div id="choice2Div" class="choice"></div>
-                    </h2>
-                </div>
-                <div class="col-md-4">
                     <h2>
                         <div id="incorrectDiv"></div>
                     </h2>
                 </div>
-            </row>
-            <row>
                 <div class="col-md-12">
-                    <h2>
-                        <div id="choice3Div" class="choice"></div>
-                    </h2>
-                </div>
-                <div class="col-md-4">
                     <h2>
                         <div id="unansweredDiv"></div>
                     </h2>
                 </div>
-            </row>
-            <row>
                 <div class="col-md-12">
                     <h2>
-                        <div id="choice4Div" class="choice"></div>
-                    </h2>
-                </div>
-                <div class="col-md-8">
-                    <h2>
-                        <div id="restartDiv"></div>
+                        <div id="answerDiv"></div>
                     </h2>
                 </div>
             </row>
+            <!-- shows the gif after users answers -->
+            <row>
+                <div class="col-md-4">
+                    <h2>
+                        <div id="imageDiv"></div>
+                    </h2>
+                </div>
+            </row>
+            <!-- block with answer choices -->
+            <row class="questionBlock">
+                <row>
+                    <div class="col-md-12">
+                        <h2>
+                            <div id="choice1Div" class="choice"></div>
+                        </h2>
+                    </div>
+                </row>
+                <row>
+                    <div class="col-md-12">
+                        <h2>
+                            <div id="choice2Div" class="choice"></div>
+                        </h2>
+                    </div>
+
+                </row>
+                <row>
+                    <div class="col-md-12">
+                        <h2>
+                            <div id="choice3Div" class="choice"></div>
+                        </h2>
+                    </div>
+                </row>
+                <row>
+                    <div class="col-md-12">
+                        <h2>
+                            <div id="choice4Div" class="choice"></div>
+                        </h2>
+                    </div>
+                </row>
+            </row>
+        </section>
+        <!-- restry button -->
+        <row>
+            <div class="col-md-12 pt-3">
+                <button type="button" class="btn btn-danger btn-lg btn-block retry ">Retry</button>
+            </div>
+        </row>
         </row>
     </div>
     <!-- Link to jQuery -->

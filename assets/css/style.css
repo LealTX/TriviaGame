@@ -1,0 +1,63 @@
+.jumbotron {
+    background-image: url(../images/plainBG.png);
+    background-attachment: fixed;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    color: azure;
+    border: 4px solid rgba(169,169,169,0.9);
+    text-align: center;
+}
+
+.choice {
+    text-align: center;
+    margin-top: 10px;
+    color: rgb(61, 61, 61);
+}
+ #answerDiv {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    color: lightskyblue;
+}
+
+#artistSongDiv {
+    color: rgb(61, 61, 61);
+}
+
+#timePlace {
+    text-align: center;
+}
+
+#artistSongDiv {
+    padding-top: 15px;
+}
+
+.choice:hover{
+    color: lightskyblue;
+}
+
+
+.bg {
+    background-image: url(../images/musicBG.jpg);
+}
+
+section{
+    background-color: rgba(119,136,153,0.9);
+    z-index: 0;
+    border: 4px solid rgba(169,169,169,0.9);
+}
+
+h1 {
+    font-family: 'Bowlby One', cursive;
+}
+
+h2 {
+    font-family: 'Archivo Black', sans-serif;
+    color: white;
+    z-index: 10;
+    font-weight: bold;
+}
+
+#questionDiv {
+    font-style: italic;
+}
