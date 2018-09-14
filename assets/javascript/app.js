@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // Define all varibles and arrays
     var count = 0;
-    var time = 10;
+    var time = 30;
     var timer;
     var correct = 0;
     var incorrect = 0;
@@ -76,7 +76,7 @@ $(document).ready(function () {
     // displays the next question
     function displayQuestion() {
         $("#timePlace").css("color", "white");
-        time = 10;
+        time = 30;
         clearInterval(timer);
         clearTimeout();
         timer = setInterval(countdown, 1000);
@@ -120,10 +120,6 @@ $(document).ready(function () {
         correct++;
         count++;
 
-        console.log("count: "+ count);
-        console.log("answer: "+ answer.length);
-        console.log(count <= answer.length - 1);
-
         if (count <= answer.length - 1) {
             setTimeout(displayQuestion, 3000);
         }
@@ -147,10 +143,6 @@ $(document).ready(function () {
 
         unanswered++;
         count++;
-
-        console.log("count: "+ count);
-        console.log("answer: "+ answer.length);
-        console.log(count <= answer.length - 1);
 
         if (count <= answer.length - 1) {
             setTimeout(displayQuestion, 3000);
@@ -176,11 +168,7 @@ $(document).ready(function () {
 
         incorrect++;
         count++;
-
-        console.log("count: "+ count);
-        console.log("answer: "+ answer.length);
-        console.log(count <= answer.length - 1);
-
+        
         if (count <= answer.length - 1) {
             setTimeout(displayQuestion, 3000);
         }
